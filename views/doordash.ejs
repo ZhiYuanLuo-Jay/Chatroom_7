@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DoorDash Frontend Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script>
+        var roomList = ['analytics','business', 'design', 'engineering', 'hr', 'operations', 'special'];
+
+        // Function to toggle left panel non-highlighted room's background color:
+        function changeColorBack(room){
+            for(var i=0; i<roomList.length; i++){
+                // console.log(roomList[i], room)
+                if(roomList[i] !== room){
+                    $('.'+ roomList[i]).css("background-color", "#ff3333");
+                }
+            }
+        }
+
+        // Function to calculate online minutes
+        function minutesCalculation(m1, m2){
+            var msDif = m2.getTime() - m1.getTime();
+            var minutes = Math.floor(msDif / 60000);
+            return minutes;
+        }
+
+        // Function to call show_room_n 
+        function show_room_n(n, data){
+            console.log("Room "+ n + ":", data); 
+            console.log("Users:", data['users']); 
+            console.log("Chat_Log:", data['chat_log']);
+
+            // update user list
+            $("#users").empty();
+            $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+            for(var i=0; i<data['users'].length; i++){
+                if(data['users'][i] !== usernameGet){
+                    $('#users').append(", " + data['users'][i]);
+                }
+            }
+
+            // retrieve chat log
+            $(".mid").empty();
+            for(var i=0; i<data['chat_log'].length; i++){
+                $('.mid').append("<p class='noticeUsr'>" + data['chat_log'][i]['username'] + "</p>");
+                $('.mid').append("<p class='noticeMsg'>" + data['chat_log'][i]['message'] + "</p>");
+            }
+            $(".mid").scrollTop(900000000000000);
+              
+        }
+
+        var usernameGet = "<%= usr.username %>"; //passing an ejs variable value to a Javascript variable
+
+        $(document).ready(function() {
+            var socket = io(); //1
+            var roomSitting = "";
+            // username got from EJS
+            console.log("var from EJS: ", usernameGet);
+
+            // online minutes calculation
+            var loginTime = new Date(); 
+            var minutes = minutesCalculation(loginTime, loginTime)
+            console.log("Online Minutes: ", minutes, "\n ")
+            $("#onlineTime").text("Online for " + minutes + " minutes");  //init online minutes
+
+            setInterval(function(){
+                // alert("Hello");
+                let upTime = new Date(); 
+                var minutes = minutesCalculation(loginTime, upTime)
+                console.log("Online Minutes: ", minutes, "\n ")
+                $("#onlineTime").text("Online for " + minutes + " minutes");  //Every 9 secs update online minutes
+            }, 9000);
+            // ======================================================================
+            
+            // Room 1
+            $('.analytics').on("click", function() {
+
+                // init chatroom template
+                $(".mid").empty();
+                $("#users").empty();
+                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+                //--------------------------------------------------------------------------------
+
+                var roomDesc = $(this).attr("room");
+                console.log(roomDesc);
+                $("#roomType").text(roomDesc); // change Chatroom name
+                $("#msgBox").attr("room", "room_1"); // set msgBox attribute to specific room for later use
+                roomSitting = "room_1";
+                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
+                $('.analytics').css("background-color", "#800000"); // change current room tab's background color
+                changeColorBack("analytics"); // toggle highlighted button background color
+
+                socket.emit('room_1_join', usernameGet); // init sending
+
+                socket.on('show_room_1', function(data) {
+                    show_room_n(1, data);
+                });
+            });
+            
+            // =====================================================================================
+
+
+            // Room 2
+            $('.business').on("click", function() {
+
+                // init chatroom template
+                $(".mid").empty();
+                $("#users").empty();
+                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+                //--------------------------------------------------------------------------------                
+
+                var roomDesc = $(this).attr("room");
+                console.log(roomDesc);
+                $("#roomType").text(roomDesc);
+                $("#msgBox").attr("room", "room_2"); // set msgBox attribute to specific room for later use
+                roomSitting = "room_2";
+                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
+                $('.business').css("background-color", "#800000");
+                changeColorBack("business"); // toggle highlighted button background color
+                
+                socket.emit('room_2_join', usernameGet); // init sending
+                
+                socket.on('show_room_2', function(data) {
+                    show_room_n(2, data);
+                });
+            });
+            
+            // =====================================================================================
+
+            // Room 3
+            $('.design').on("click", function() {
+
+                // init chatroom template
+                $(".mid").empty();
+                $("#users").empty();
+                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+                //--------------------------------------------------------------------------------                
+
+                var roomDesc = $(this).attr("room");
+                console.log(roomDesc);
+                $("#roomType").text(roomDesc);
+                $("#msgBox").attr("room", "room_3"); // set msgBox attribute to specific room for later use
+                roomSitting = "room_3";
+                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
+                $('.design').css("background-color", "#800000");
+                changeColorBack("design"); // toggle highlighted button background color
+                
+                socket.emit('room_3_join', usernameGet); // init sending
+                
+                socket.on('show_room_3', function(data) {
+                    show_room_n(3, data);
+                });
+            });
+
+            // =====================================================================================
+
+            // Room 4
+            $('.engineering').on("click", function() {
+
+                // init chatroom template
+                $(".mid").empty();
+                $("#users").empty();
+                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+                //--------------------------------------------------------------------------------                
+
+                var roomDesc = $(this).attr("room");
+                console.log(roomDesc);
+                $("#roomType").text(roomDesc);
+                $("#msgBox").attr("room", "room_4"); // set msgBox attribute to specific room for later use
+                roomSitting = "room_4";
+                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
+                $('.engineering').css("background-color", "#800000");
+                changeColorBack("engineering"); // toggle highlighted button background color
+                
+                socket.emit('room_4_join', usernameGet); // init sending
+                
+                socket.on('show_room_4', function(data) {
+                    show_room_n(4, data);
+                });
+            });
+            
+            // Room 5
+            $('.hr').on("click", function() {
+
+                // init chatroom template
+                $(".mid").empty();
+                $("#users").empty();
+                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+                //--------------------------------------------------------------------------------                
+
+                var roomDesc = $(this).attr("room");
+                console.log(roomDesc);
+                $("#roomType").text(roomDesc);
+                $("#msgBox").attr("room", "room_5"); // set msgBox attribute to specific room for later use
+                roomSitting = "room_5";
+                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
+                $('.hr').css("background-color", "#800000");
+                changeColorBack("hr"); // toggle highlighted button background color
+                
+                socket.emit('room_5_join', usernameGet); // init sending
+                
+                socket.on('show_room_5', function(data) {
+                    show_room_n(5, data);
+                });
+            });
+            
+            // Room 6
+            $('.operations').on("click", function() {
+
+                // init chatroom template
+                $(".mid").empty();
+                $("#users").empty();
+                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+                //--------------------------------------------------------------------------------                
+
+                var roomDesc = $(this).attr("room");
+                console.log(roomDesc);
+                $("#roomType").text(roomDesc);
+                $("#msgBox").attr("room", "room_6"); // set msgBox attribute to specific room for later use
+                roomSitting = "room_6";
+                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
+                $('.operations').css("background-color", "#800000");
+                changeColorBack("operations"); // toggle highlighted button background color
+                
+                socket.emit('room_6_join', usernameGet); // init sending
+                
+                socket.on('show_room_6', function(data) {
+                    show_room_n(6, data);
+                });
+            });
+
+            // Room 7
+            $('.special').on("click", function() {
+
+                // init chatroom template
+                $(".mid").empty();
+                $("#users").empty();
+                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+                //--------------------------------------------------------------------------------                
+
+                var roomDesc = $(this).attr("room");
+                console.log(roomDesc);
+                $("#roomType").text(roomDesc);
+                $("#msgBox").attr("room", "room_7"); // set msgBox attribute to specific room for later use
+                roomSitting = "room_7";
+                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
+                $('.special').css("background-color", "#800000");
+                changeColorBack("special"); // toggle highlighted button background color
+                
+                socket.emit('room_7_join', usernameGet); // init sending
+                
+                socket.on('show_room_7', function(data) {
+                    show_room_n(7, data);
+                });
+            });        
+
+
+
+
+
+            // By changing Room sitting number, send message to appropriate room log in server created by myself //
+            $('#send').on("click", function(){
+                let message = $('#msgBox').val();
+                if (message.length !== 0){
+                    console.log("Message:", message);
+                    $('.mid').append("<p class='createMsg'>" + message + "</p>");
+                    $(".mid").scrollTop(900000000000000);
+                    $('#msgBox').val(""); //reset message box to blank
+                    let msgObj = {
+                        username: $('#msgBox').attr("username"),
+                        message: message,
+                    }
+                    console.log("msgObj:", msgObj)
+                    socket.emit(roomSitting +'_msg', msgObj)
+                }
+            });
+            
+            // Receive message from server created by others
+            socket.on('update_chat_' + roomSitting, function(data) { // receiving 
+                console.log("=== Name Log ===", data.username);
+                console.log("=== Chat Log ===", data.message);
+                $('.mid').append("<p class='noticeUsr'>" + data.username + "</p>");
+                $('.mid').append("<p class='noticeMsg'>" + data.message + "</p>");
+                $(".mid").scrollTop(900000000000000);
+            });
+
+        })
+    </script>
+</head>
+
+<body>
+    <!-- <%= JSON.stringify(usr) %> -->
+    <div class="wrapper">
+        <div>
+            <div class="left">
+                <div class="userinfo">
+                    <h3 style="color: white; margin-left: 40px;"><%= usr.username %></h3>
+                    <p id="onlineTime"></p>
+                </div>
+
+                <div class="analytics" room = "Analytics">
+                    <h4 style="color: white;">Analytics</h4>
+                </div>
+                
+                <div class="business" room = "Business">
+                    <h4 style="color: white;">Business</h4>
+                </div>
+
+                <div class="design" room = "Design">
+                    <h4 style="color: white;">Design</h4>                
+                </div>
+
+                <div class="engineering" room = "Engineering">
+                    <h4 style="color: white;">Engineering</h4>
+                </div>
+                
+                <div class="hr" room = "HR">
+                    <h4 style="color: white;">HR</h4>
+                </div>
+
+                <div class="operations" room = "Operations">
+                    <h4 style="color: white;">Operations</h4>
+                </div>
+                
+                <div class="special" room = "Special Ops">
+                    <h4 style="color: white;">Special Ops</h4>
+                </div>
+            </div>
+
+            <div class="right">
+                <div class="top">
+                    <h4 id="roomType" style="padding-left: 270px">Welcome</h4>
+                    <p id="users" style="width: 650px; height: 60px; overflow: auto;"><span style="color: #ff3333"><%= usr.username %></span></p>
+                </div>
+
+                <div class="mid"></div>
+
+                <div class="bottom">
+                    <input type="text" name="msg" id="msgBox" username="" room = "" placeholder="Type a message..." style="display: inline-block;">
+                    <button id="send" style="display: inline-block; color:rgb(47, 91, 105); background-color: white; margin-left: 8px; padding: 10px;">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

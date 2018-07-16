@@ -1,0 +1,224 @@
+* {
+    /* outline: 1px dotted black; */
+    margin: 0px auto;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    width: 950px;
+    min-height: 600px;
+    /* padding: 5px; */
+    /* background-color: beige; */
+}
+
+.left {
+    width: 250px;
+    min-height: 600px;
+    /* border: 1px solid lightblue; */
+    display: inline-block;
+    /* overflow: auto; */
+    background-color: #ff3333;
+    margin: 0px;
+    
+}
+
+.right {
+    width: 695px;
+    min-height: 600px;
+    /* border: 1px solid lightgreen; */
+    display: inline-block;
+    vertical-align: top;
+    margin: 0px;
+}
+
+.top {
+    width: 695px;
+    min-height: 100px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.mid {
+    width: 695px;
+    height: 420px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+    background-color: #eaeae1;
+    overflow: auto;
+}
+
+.createMsg {
+    display: inline-block;
+    margin-left: 340px;
+    max-width:340px; 
+    word-wrap: break-word; 
+    background-color:#ff3333;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    padding: 10px 20px 10px 20px;
+    float: right;
+}
+
+.noticeUsr {
+    display: inline-block;
+    margin-right: 340px;
+    max-width:340px; 
+    word-wrap: break-word; 
+    /* background-color:white; */
+    /* border-radius: 20px; */
+    margin-bottom: 20px;
+    /* padding: 10px 20px 10px 20px; */
+    float: left;
+}
+
+.noticeMsg {
+    display: inline-block;
+    margin-right: 340px;
+    max-width:340px; 
+    word-wrap: break-word; 
+    background-color:white;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    padding: 10px 20px 10px 20px;
+    float: left;
+}
+
+
+.bottom {
+    width: 695px;
+    min-height: 80px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+    padding: 15px;
+}
+
+.userinfo {
+    width: 250px;
+    min-height: 100px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.analytics {
+    width: 250px;
+    min-height: 60px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.business {
+    width: 250px;
+    min-height: 60px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.design {
+    width: 250px;
+    min-height: 60px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.engineering {
+    width: 250px;
+    min-height: 60px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.hr {
+    width: 250px;
+    min-height: 60px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.operations {
+    width: 250px;
+    min-height: 60px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+.special {
+    width: 250px;
+    min-height: 60px;
+    /* border: 1px solid black; */
+    display: inline-block;
+    vertical-align: top;
+}
+
+#usrname {
+    margin-left: 10px;
+    padding: 15px 44px; 
+    margin-top: 230px;
+    border-radius: 3px;
+}
+
+#login {
+    margin-left: 10px;
+    margin-top: 5px;
+    padding: 15px 55px 15px 55px; 
+    background-color:#ff3333;
+    color: white; 
+    border-radius: 3px;
+    display: block;
+}
+
+#users{
+    text-align: center;
+}
+
+h3, h4 {
+    /* color: white; */
+    margin-left: 40px;
+    padding-top: 8px;
+}
+
+#onlineTime {
+    color: white;
+    margin-left: 40px;
+}
+
+#msgBox {
+    padding-top: 10px;
+    width: 590px;
+    padding-bottom: 10px;
+
+}
+
+/* #id {
+    display: inline-block; 
+    color:rgb(47, 91, 105);
+    margin-left: 8px; 
+    padding: 10px;
+} */
+
+/* #show {
+    display: inline-block;
+} */
+
+/* #usr-area {
+    margin: 5px 5px 5px 0px;
+    width: 940px;
+    height: 60px;
+    border: 5px solid lightblue;
+    overflow: auto;
+    border-radius: 10px;
+} */
+
+/* #list {
+    margin-bottom: 5px;
+} */
