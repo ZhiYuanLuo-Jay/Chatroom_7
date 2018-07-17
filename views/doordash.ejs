@@ -288,14 +288,15 @@
             });
             
             // Receive message from server created by others
-            socket.on('update_chat_' + roomSitting, function(data) { // receiving 
-                console.log("=== Name Log ===", data.username);
-                console.log("=== Chat Log ===", data.message);
-                $('.mid').append("<p class='noticeUsr'>" + data.username + "</p>");
-                $('.mid').append("<p class='noticeMsg'>" + data.message + "</p>");
-                $(".mid").scrollTop(900000000000000);
-            });
-
+            for (var i=1; i<=7; i++){
+                socket.on('update_chat_room_' + i, function(data) { // receiving 
+                    console.log("=== Name Log ===", data.username);
+                    console.log("=== Chat Log ===", data.message);
+                    $('.mid').append("<p class='noticeUsr'>" + data.username + "</p>");
+                    $('.mid').append("<p class='noticeMsg'>" + data.message + "</p>");
+                    $(".mid").scrollTop(900000000000000);
+                });
+            }
         })
     </script>
 </head>
