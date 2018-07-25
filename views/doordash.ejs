@@ -17,7 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     
     <script>
-        var roomList = ['analytics','business', 'design', 'engineering', 'hr', 'operations', 'special'];
+        var roomList = ['0', '1','2', '3', '4', '5', '6'];
 
         // Function to toggle left panel non-highlighted room's background color:
         function changeColorBack(room){
@@ -58,7 +58,6 @@
                 $('.mid').append("<p class='noticeMsg'>" + data['chat_log'][i]['message'] + "</p>");
             }
             $(".mid").scrollTop(900000000000000);
-              
         }
 
         var usernameGet = "<%= usr.username %>"; //passing an ejs variable value to a Javascript variable
@@ -84,195 +83,34 @@
             }, 9000);
             // ======================================================================
             
-            // Room 1
-            $('.analytics').on("click", function() {
+            // Room 0-6
+            for(let i=0; i<7; i++){
+                $('.'+ i).on("click", function() {
 
-                // init chatroom template
-                $(".mid").empty();
-                $("#users").empty();
-                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
-                //--------------------------------------------------------------------------------
+                    // init chatroom template
+                    $(".mid").empty();
+                    $("#users").empty();
+                    $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
+                    //--------------------------------------------------------------------------------
 
-                var roomDesc = $(this).attr("room");
-                console.log(roomDesc);
-                $("#roomType").text(roomDesc); // change Chatroom name
-                $("#msgBox").attr("room", "room_1"); // set msgBox attribute to specific room for later use
-                roomSitting = "room_1";
-                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
-                $('.analytics').css("background-color", "#800000"); // change current room tab's background color
-                changeColorBack("analytics"); // toggle highlighted button background color
+                    var roomDesc = $(this).attr("room");
+                    console.log(roomDesc);
+                    $("#roomType").text(roomDesc); // change Chatroom name
+                    $("#msgBox").attr("room", "room_"+i); // set msgBox attribute to specific room for later use
+                    roomSitting = "room_"+i;
+                    $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
+                    $('.'+i).css("background-color", "#800000"); // change current room tab's background color
+                    changeColorBack(""+i); // toggle highlighted button background color
 
-                socket.emit('room_1_join', usernameGet); // init sending
+                    socket.emit('room'+i, usernameGet); // init sending
 
-                socket.on('show_room_1', function(data) {
-                    show_room_n(1, data);
+                    socket.on('show'+i, function(data) {
+                        show_room_n(i, data);
+                    });
                 });
-            });
-            
-            // =====================================================================================
+            }
 
-
-            // Room 2
-            $('.business').on("click", function() {
-
-                // init chatroom template
-                $(".mid").empty();
-                $("#users").empty();
-                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
-                //--------------------------------------------------------------------------------                
-
-                var roomDesc = $(this).attr("room");
-                console.log(roomDesc);
-                $("#roomType").text(roomDesc);
-                $("#msgBox").attr("room", "room_2"); // set msgBox attribute to specific room for later use
-                roomSitting = "room_2";
-                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
-                $('.business').css("background-color", "#800000");
-                changeColorBack("business"); // toggle highlighted button background color
-                
-                socket.emit('room_2_join', usernameGet); // init sending
-                
-                socket.on('show_room_2', function(data) {
-                    show_room_n(2, data);
-                });
-            });
-            
-            // =====================================================================================
-
-            // Room 3
-            $('.design').on("click", function() {
-
-                // init chatroom template
-                $(".mid").empty();
-                $("#users").empty();
-                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
-                //--------------------------------------------------------------------------------                
-
-                var roomDesc = $(this).attr("room");
-                console.log(roomDesc);
-                $("#roomType").text(roomDesc);
-                $("#msgBox").attr("room", "room_3"); // set msgBox attribute to specific room for later use
-                roomSitting = "room_3";
-                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
-                $('.design').css("background-color", "#800000");
-                changeColorBack("design"); // toggle highlighted button background color
-                
-                socket.emit('room_3_join', usernameGet); // init sending
-                
-                socket.on('show_room_3', function(data) {
-                    show_room_n(3, data);
-                });
-            });
-
-            // =====================================================================================
-
-            // Room 4
-            $('.engineering').on("click", function() {
-
-                // init chatroom template
-                $(".mid").empty();
-                $("#users").empty();
-                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
-                //--------------------------------------------------------------------------------                
-
-                var roomDesc = $(this).attr("room");
-                console.log(roomDesc);
-                $("#roomType").text(roomDesc);
-                $("#msgBox").attr("room", "room_4"); // set msgBox attribute to specific room for later use
-                roomSitting = "room_4";
-                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
-                $('.engineering').css("background-color", "#800000");
-                changeColorBack("engineering"); // toggle highlighted button background color
-                
-                socket.emit('room_4_join', usernameGet); // init sending
-                
-                socket.on('show_room_4', function(data) {
-                    show_room_n(4, data);
-                });
-            });
-            
-            // Room 5
-            $('.hr').on("click", function() {
-
-                // init chatroom template
-                $(".mid").empty();
-                $("#users").empty();
-                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
-                //--------------------------------------------------------------------------------                
-
-                var roomDesc = $(this).attr("room");
-                console.log(roomDesc);
-                $("#roomType").text(roomDesc);
-                $("#msgBox").attr("room", "room_5"); // set msgBox attribute to specific room for later use
-                roomSitting = "room_5";
-                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
-                $('.hr').css("background-color", "#800000");
-                changeColorBack("hr"); // toggle highlighted button background color
-                
-                socket.emit('room_5_join', usernameGet); // init sending
-                
-                socket.on('show_room_5', function(data) {
-                    show_room_n(5, data);
-                });
-            });
-            
-            // Room 6
-            $('.operations').on("click", function() {
-
-                // init chatroom template
-                $(".mid").empty();
-                $("#users").empty();
-                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
-                //--------------------------------------------------------------------------------                
-
-                var roomDesc = $(this).attr("room");
-                console.log(roomDesc);
-                $("#roomType").text(roomDesc);
-                $("#msgBox").attr("room", "room_6"); // set msgBox attribute to specific room for later use
-                roomSitting = "room_6";
-                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
-                $('.operations').css("background-color", "#800000");
-                changeColorBack("operations"); // toggle highlighted button background color
-                
-                socket.emit('room_6_join', usernameGet); // init sending
-                
-                socket.on('show_room_6', function(data) {
-                    show_room_n(6, data);
-                });
-            });
-
-            // Room 7
-            $('.special').on("click", function() {
-
-                // init chatroom template
-                $(".mid").empty();
-                $("#users").empty();
-                $('#users').append("<span style='color: #ff3333'><%= usr.username %></span>");
-                //--------------------------------------------------------------------------------                
-
-                var roomDesc = $(this).attr("room");
-                console.log(roomDesc);
-                $("#roomType").text(roomDesc);
-                $("#msgBox").attr("room", "room_7"); // set msgBox attribute to specific room for later use
-                roomSitting = "room_7";
-                $("#msgBox").attr("username", usernameGet); // set msgBox attribute to specific room for later use
-                $('.special').css("background-color", "#800000");
-                changeColorBack("special"); // toggle highlighted button background color
-                
-                socket.emit('room_7_join', usernameGet); // init sending
-                
-                socket.on('show_room_7', function(data) {
-                    show_room_n(7, data);
-                });
-            });        
-
-
-
-
-
-            // By changing Room sitting number, send message to appropriate room log in server created by myself //
-            $('#send').on("click", function(){
-                let message = $('#msgBox').val();
+            function sendBtn(message){
                 if (message.length !== 0){
                     console.log("Message:", message);
                     $('.mid').append("<p class='createMsg'>" + message + "</p>");
@@ -285,29 +123,23 @@
                     console.log("msgObj:", msgObj)
                     socket.emit(roomSitting +'_msg', msgObj)
                 }
+            }
+            // By changing Room sitting number, send message to appropriate room log in server created by myself //
+            $('#send').on("click", function(){
+                let message = $('#msgBox').val();
+                sendBtn(message);
             });
 
             $("#msgBox").keypress(function(e) {
                 var key = e.which;
                 if (key == 13) {
                     let message = $('#msgBox').val();
-                    if (message.length !== 0){
-                        console.log("Message:", message);
-                        $('.mid').append("<p class='createMsg'>" + message + "</p>");
-                        $(".mid").scrollTop(900000000000000);
-                        $('#msgBox').val(""); //reset message box to blank
-                        let msgObj = {
-                            username: $('#msgBox').attr("username"),
-                            message: message,
-                        }
-                        console.log("msgObj:", msgObj)
-                        socket.emit(roomSitting +'_msg', msgObj)
-                    }
+                    sendBtn(message);
                 }
             })            
             
             // Receive message from server created by others
-            for (var i=1; i<=7; i++){
+            for (let i=0; i<7; i++){
                 socket.on('update_chat_room_' + i, function(data) { // receiving 
                     console.log("=== Name Log ===", data.username);
                     console.log("=== Chat Log ===", data.message);
@@ -330,31 +162,31 @@
                     <p id="onlineTime"></p>
                 </div>
 
-                <div class="analytics" room = "Analytics">
+                <div class="0" room = "Analytics">
                     <h4 style="color: white;">Analytics</h4>
                 </div>
                 
-                <div class="business" room = "Business">
+                <div class="1" room = "Business">
                     <h4 style="color: white;">Business</h4>
                 </div>
 
-                <div class="design" room = "Design">
+                <div class="2" room = "Design">
                     <h4 style="color: white;">Design</h4>                
                 </div>
 
-                <div class="engineering" room = "Engineering">
+                <div class="3" room = "Engineering">
                     <h4 style="color: white;">Engineering</h4>
                 </div>
                 
-                <div class="hr" room = "HR">
+                <div class="4" room = "HR">
                     <h4 style="color: white;">HR</h4>
                 </div>
 
-                <div class="operations" room = "Operations">
+                <div class="5" room = "Operations">
                     <h4 style="color: white;">Operations</h4>
                 </div>
                 
-                <div class="special" room = "Special Ops">
+                <div class="6" room = "Special Ops">
                     <h4 style="color: white;">Special Ops</h4>
                 </div>
             </div>
