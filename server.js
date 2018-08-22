@@ -43,8 +43,9 @@ app.get('/chatroom', function(req, res) {
 })
 
 // using socket
-const server = app.listen(9000, function() {
-    console.log("listening on port 9000");
+const port = process.env.PORT || 9000
+const server = app.listen(port, function() {
+    console.log("listening on port: " + port);
 });
 const io = require('socket.io')(server);
 

@@ -124,7 +124,7 @@
                     socket.emit(roomSitting +'_msg', msgObj)
                 }
             }
-            // By changing Room sitting number, send message to appropriate room log in server created by myself //
+            // By send button or enter to send message 
             $('#send').on("click", function(){
                 let message = $('#msgBox').val();
                 sendBtn(message);
