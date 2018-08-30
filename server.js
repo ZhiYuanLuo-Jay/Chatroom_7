@@ -39,7 +39,7 @@ app.post('/login', function(req, res) {
 
 app.get('/chatroom', function(req, res) {
     var info = req.session.info
-    res.render("doordash", { usr: info });
+    res.render("depts", { usr: info });
 })
 
 // using socket

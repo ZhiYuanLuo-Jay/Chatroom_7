@@ -14,7 +14,7 @@
 
 .left {
     width: 250px;
-    min-height: 600px;
+    min-height: 608px;
     /* border: 1px solid lightblue; */
     display: inline-block;
     /* overflow: auto; */
@@ -93,7 +93,8 @@
     /* border: 1px solid black; */
     display: inline-block;
     vertical-align: top;
-    padding: 15px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .userinfo {
@@ -170,7 +171,7 @@
 #login {
     margin-left: 10px;
     margin-top: 5px;
-    padding: 15px 55px 15px 55px; 
+    padding: 15px 60px 15px 55px; 
     background-color:#ff3333;
     color: white; 
     border-radius: 3px;
@@ -184,7 +185,8 @@
 h3, h4 {
     /* color: white; */
     margin-left: 40px;
-    padding-top: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #onlineTime {
@@ -194,31 +196,7 @@ h3, h4 {
 
 #msgBox {
     padding-top: 10px;
-    width: 590px;
+    width: 625px;
     padding-bottom: 10px;
 
 }
-
-/* #id {
-    display: inline-block; 
-    color:rgb(47, 91, 105);
-    margin-left: 8px; 
-    padding: 10px;
-} */
-
-/* #show {
-    display: inline-block;
-} */
-
-/* #usr-area {
-    margin: 5px 5px 5px 0px;
-    width: 940px;
-    height: 60px;
-    border: 5px solid lightblue;
-    overflow: auto;
-    border-radius: 10px;
-} */
-
-/* #list {
-    margin-bottom: 5px;
-} */
